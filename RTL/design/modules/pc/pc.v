@@ -21,7 +21,7 @@ end
 ///////////// comb
 always @(*) begin
     if(pc_write)
-        pc_out_nxt = bus;
+        pc_out_nxt = {8'b0,bus[7:0]};
     else if(pc_inc)
         pc_out_nxt = pc_out + 1 ;
     else
