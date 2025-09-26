@@ -5,12 +5,14 @@ module tb;
 reg signed [15:0]a,b;
 reg [3:0]op;
 wire [16:0]res;
+wire [1:0]flag;
 
 alu dut(
     .a(a),
     .b(b),
     .op(op),
-    .res(res)
+    .res(res),
+    .flag(flag)
 );
 
 

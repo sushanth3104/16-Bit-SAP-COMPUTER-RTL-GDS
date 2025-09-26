@@ -11,7 +11,8 @@ module alu(
     input signed [15:0]a,
     input signed [15:0]b,
     input [3:0]op,
-    output reg signed[16:0]res
+    output reg signed[16:0]res,
+    output reg [1:0]flag
 );
 
     always@(*) begin
@@ -27,6 +28,11 @@ module alu(
         default: res = 17'd0;
         endcase
 
+    end
+
+    always @(*) begin
+        flag[0] = ~|res[15:0]; // Zero Flag
+        flag[1] = res[16]    ; // Overflow flag
     end
     
 endmodule
