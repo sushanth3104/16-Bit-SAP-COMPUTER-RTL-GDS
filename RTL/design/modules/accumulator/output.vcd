@@ -1,0 +1,111 @@
+$date
+	Fri Sep 26 19:21:20 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb $end
+$var wire 16 ! aout [15:0] $end
+$var reg 1 " acc_lower_write $end
+$var reg 1 # acc_write $end
+$var reg 16 $ bus [15:0] $end
+$var reg 1 % clk $end
+$var reg 1 & rst $end
+$scope module dut $end
+$var wire 1 " acc_lower_write $end
+$var wire 1 # acc_write $end
+$var wire 16 ' bus [15:0] $end
+$var wire 1 % clk $end
+$var wire 1 & rst $end
+$var reg 16 ( aout [15:0] $end
+$var reg 16 ) aout_nxt [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx )
+bx (
+b0 '
+0&
+0%
+b0 $
+0#
+0"
+bx !
+$end
+#5000
+1%
+#10000
+0%
+#12000
+1&
+#15000
+b0 )
+b0 !
+b0 (
+1%
+#17000
+0&
+#19000
+b100101100 $
+b100101100 '
+#20000
+0%
+#22000
+b100101100 )
+1#
+#25000
+b100101100 !
+b100101100 (
+1%
+#30000
+0%
+#32000
+0#
+#35000
+1%
+#37000
+1&
+#40000
+0&
+0%
+#43000
+b1101111011011110 $
+b1101111011011110 '
+#45000
+b11011110 )
+1"
+1%
+#50000
+0%
+#55000
+b11011110 !
+b11011110 (
+1%
+#58000
+0"
+#60000
+0%
+#65000
+1%
+#70000
+0%
+#75000
+1%
+#80000
+0%
+#85000
+1%
+#90000
+0%
+#95000
+1%
+#100000
+0%
