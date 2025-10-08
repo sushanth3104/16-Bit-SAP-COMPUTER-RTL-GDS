@@ -1,11 +1,11 @@
-`define ADD 4'd0
-`define SUB 4'd1
-`define INC 4'd2
-`define DEC 4'd3
-`define AND 4'd4
-`define OR 4'd5
-`define XOR 4'd6
-`define NOT 4'd7
+`define ADD_OP 4'd0
+`define SUB_OP 4'd1
+`define INC_OP 4'd2
+`define DEC_OP 4'd3
+`define AND_OP 4'd4
+`define OR_OP 4'd5
+`define XOR_OP 4'd6
+`define NOT_OP 4'd7
 
 module alu(
     input signed [15:0]a,
@@ -17,14 +17,14 @@ module alu(
 
     always@(*) begin
         case(op)
-        `ADD: res = a + b ;
-        `SUB: res = a - b ;
-        `INC: res = a + $signed(1);
-        `DEC: res = a - $signed(1);
-        `AND: res = {1'b0, a & b};
-        `OR:  res = {1'b0, a | b};
-        `XOR: res = {1'b0, a ^ b};
-        `NOT: res = {1'b0, ~a};
+        `ADD_OP: res = a + b ;
+        `SUB_OP: res = a - b ;
+        `INC_OP: res = a + $signed(1);
+        `DEC_OP: res = a - $signed(1);
+        `AND_OP: res = {1'b0, a & b};
+        `OR_OP:  res = {1'b0, a | b};
+        `XOR_OP: res = {1'b0, a ^ b};
+        `NOT_OP: res = {1'b0, ~a};
         default: res = 17'd0;
         endcase
 

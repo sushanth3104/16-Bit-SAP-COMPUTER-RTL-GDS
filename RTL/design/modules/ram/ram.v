@@ -1,9 +1,10 @@
 
 module ram(
+    input clk,
+    input ram_write,
     input [15:0]bus,
     input [15:0]addr,
-    input ram_write,
-    output reg [15:0]ram_out
+    output  [15:0]ram_out
 );
 
 reg [15:0]mem[255:0];
@@ -13,13 +14,14 @@ initial begin
 end
 
 
-always @(*) begin
-        if(ram_write)
-            mem[addr[7:0]] = bus;
+always @(posedge clk) begin
+        if(ram_write) // Synchronous Write
+            mem[addr[7:0]] <= bus;
 
-        ram_out = mem[addr[7:0]];
+        
 end
 
+assign ram_out = mem[addr];
 
 
 endmodule
