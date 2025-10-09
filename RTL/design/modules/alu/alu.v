@@ -11,10 +11,11 @@ module alu(
     input signed [15:0]a,
     input signed [15:0]b,
     input [3:0]op,
-    output reg signed[16:0]res,
+    output reg signed[15:0]alu_out,
     output reg [1:0]flag
 );
 
+    reg [16:0]res;
     always@(*) begin
         case(op)
         `ADD_OP: res = a + b ;
@@ -30,9 +31,11 @@ module alu(
 
     end
 
+
     always @(*) begin
         flag[0] = ~|res[15:0]; // Zero Flag
         flag[1] = res[16]    ; // Overflow flag
+        alu_out = res[15:0];
     end
     
 endmodule

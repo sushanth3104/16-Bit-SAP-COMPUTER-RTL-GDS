@@ -33,7 +33,7 @@ module cu(
     input [1:0]flag,   // flag[0] = Zero Flag , flag[1] = Carry Flag
     input [7:0]opcode,
     output [13:0]cs,
-    output [5:0]bus_cs
+    output [4:0]bus_cs
 );
 
 localparam [3:0] 
@@ -99,7 +99,6 @@ assign cs = {
 reg acc_to_bus;
 reg alu_to_bus;
 reg ir_to_bus;
-reg mar_to_bus;
 reg pc_to_bus;
 reg ram_to_bus;
 
@@ -108,7 +107,6 @@ assign bus_cs = {
                 acc_to_bus,
                 alu_to_bus,
                 ir_to_bus,
-                mar_to_bus,
                 pc_to_bus,
                 ram_to_bus
 
@@ -218,7 +216,6 @@ always @(*) begin
     acc_to_bus = 0;
     alu_to_bus = 0;
     ir_to_bus = 0;
-    mar_to_bus = 0;
     pc_to_bus = 0;
     ram_to_bus = 0;
 

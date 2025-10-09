@@ -16,12 +16,12 @@ end
 
 always @(posedge clk) begin
         if(ram_write) // Synchronous Write
-            mem[addr[7:0]] <= bus;
+            mem[addr] <= bus;
 
         
 end
 
-assign ram_out = mem[addr];
+assign ram_out = mem[addr]; // Combinational Read
 
 
 endmodule

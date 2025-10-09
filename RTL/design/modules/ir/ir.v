@@ -6,7 +6,7 @@ module ir(
     output reg [15:0]ir_out
 );
 
-reg [7:0]ir_out_nxt;
+reg [15:0]ir_out_nxt;
 
 ////////////// flops
 always @(posedge clk) begin
@@ -19,7 +19,7 @@ end
 ///////////// comb
 always @(*) begin
     if(ir_write)
-        ir_out_nxt = bus[15:0];
+        ir_out_nxt = bus;
     else
         ir_out_nxt = ir_out ;
 end

@@ -3,10 +3,10 @@ module mar(
     input rst,
     input mar_write,
     input [15:0]bus,
-    output reg [7:0]mar_out
+    output reg [15:0]mar_out
 );
 
-reg [7:0]mar_out_nxt;
+reg [15:0]mar_out_nxt;
 
 
 ////////////// flops
@@ -20,7 +20,7 @@ end
 ///////////// comb
 always @(*) begin
     if(mar_write)
-        mar_out_nxt = bus[7:0];
+        mar_out_nxt = bus;
     else
         mar_out_nxt = mar_out ;
 end
