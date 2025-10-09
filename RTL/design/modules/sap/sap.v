@@ -1,15 +1,18 @@
-`include "../accumulator/accumulator.v"
-`include "../alu/alu.v"
-`include "../b_register/b_register.v"
-`include "../cu/cu.v"
-`include "../flag/flag.v"
-`include "../ir/ir.v"
-`include "../mar/mar.v"
-`include "../output/output.v"
-`include "../pc/pc.v"
-`include "../ram/ram.v"
+`include "accumulator.v"
+`include "alu.v"
+`include "b_register.v"
+`include "cu.v"
+`include "flag.v"
+`include "ir.v"
+`include "mar.v"
+`include "out.v"
+`include "pc.v"
+`include "ram.v"
 
-module top(
+
+
+
+module sap(
     input clk,rst,
     output [15:0]debug
 );
@@ -75,7 +78,7 @@ assign opcode = ir_out[15:8];
 
 
 ////// Debug Bus
-debug = bus;
+assign debug = bus;
 
 //////// Instrantiation
 
@@ -94,14 +97,14 @@ alu alu1(
     .b(bout),
     .op(alu_op),
     .alu_out(alu_out),
-    flag(flag)
+    .flag(flag)
 
 );
 
 b_register b_register1(
     .clk(clk),
     .rst(rst),
-    b_write(b_write),
+    .b_write(b_write),
     .bus(bus),
     .bout(bout)
 );
@@ -110,7 +113,7 @@ cu cu1(
     .clk(clk),
     .rst(rst),
     .flag(flag_out),
-    opcode(opcode),
+    .opcode(opcode),
     .cs(cs),
     .bus_cs(bus_cs)
 );
