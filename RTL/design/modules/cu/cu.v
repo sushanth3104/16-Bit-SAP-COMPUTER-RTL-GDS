@@ -117,7 +117,7 @@ assign bus_cs = {
 //////////// flops
 always @(posedge clk ) begin
 
-    if(rst) state <= 0;
+    if(rst) state <= idle;
     else    state <= state_nxt;
     
 end
@@ -136,12 +136,14 @@ always @(*) begin
         fetch1 : state_nxt = fetch2 ;
 
         fetch2 : begin
-
+            state_nxt = fetch1;
             case(opcode)
                 `LDA : state_nxt = lda1 ;
                 `STA : state_nxt = sta1 ;
                 `ADD,`SUB,`INCA,`DECR,`AND,`OR,`XOR,`NOT : state_nxt = alu1 ;
-                `JMP,`JMPZ,`JMPC  : state_nxt = jmp1 ;
+                `JMP: state_nxt = jmp1;
+                `JMPZ: state_nxt = flag[0]? jmp1 : fetch1;
+                `JMPC  : state_nxt = flag[1]? jmp1 : fetch1;
                 `NOP :  state_nxt = fetch1 ;
                 `LDI :  state_nxt = ldi1 ;
                 `OUT :  state_nxt = out1 ;
@@ -162,14 +164,17 @@ always @(*) begin
         sta2 : state_nxt = fetch1 ;
 
         ///////////////// ALU
-        alu1 : state_nxt = alu2 ;
+        alu1 : begin
+               state_nxt = fetch1;
+                case(opcode)
+                    `ADD,`SUB,`AND,`OR,`XOR: state_nxt = alu2;
+                    `INCA,`DECR,`NOT : state_nxt = fetch1;
+                endcase
+                end
         alu2 : begin
-            state_nxt = fetch1;
-            case(opcode)
-                `ADD,`SUB,`AND,`OR,`XOR: state_nxt = alu3;
-                `INCA,`DECR,`NOT : state_nxt = fetch1;
-            endcase
+            state_nxt = alu3;
         end
+        
         alu3 : state_nxt = fetch1 ;
 
 
@@ -257,14 +262,20 @@ always @(*) begin
             `INCA: begin
                 alu_op = `INC_OP;
                 flag_write = 1'b1;
+                acc_write = 1'b1;
+                alu_to_bus = 1'b1;
             end
             `DECR : begin
                 alu_op = `DEC_OP;
                 flag_write = 1'b1;
+                acc_write = 1'b1;
+                alu_to_bus = 1'b1;
             end
             `NOT : begin
                 alu_op = `NOT_OP;
                 flag_write = 1'b1;
+                acc_write = 1'b1;
+                alu_to_bus = 1'b1;
             end
 
             `ADD,`SUB,`AND,`OR,`XOR : begin
@@ -278,99 +289,36 @@ always @(*) begin
         alu2 : begin
             case(opcode)
 
-            `INCA: begin
-                acc_write = 1'b1;
-                alu_to_bus = 1'b1;
-                alu_op = `INC_OP;
-
-            end
-
-            `DECR: begin
-                acc_write = 1'b1;
-                alu_to_bus = 1'b1;
-                alu_op = `DEC_OP;
-
-            end
-
-            `NOT: begin
-                acc_write = 1'b1;
-                alu_to_bus = 1'b1;
-                alu_op = `NOT_OP;
-
-            end
-
-            `ADD : begin
+            `ADD,`SUB,`AND,`OR,`XOR : begin
 
                 ram_to_bus = 1'b1;
                 b_write = 1'b1;
-                alu_op = `ADD_OP;
-                flag_write = 1'b1;
                 
-            end
-
-            `SUB : begin
-                ram_to_bus = 1'b1;
-                b_write = 1'b1;
-                alu_op = `SUB_OP;
-                flag_write = 1'b1;
-
-            end
-
-            `AND : begin
-                ram_to_bus = 1'b1;
-                b_write = 1'b1;
-                alu_op = `AND_OP;
-                flag_write = 1'b1;
-            end
-
-            `OR: begin
-                ram_to_bus = 1'b1;
-                b_write = 1'b1;
-                alu_op = `OR_OP;
-                flag_write = 1'b1;
-
-            end
-            `XOR: begin
-                ram_to_bus = 1'b1;
-                b_write = 1'b1;
-                alu_op = `XOR_OP;
-                flag_write = 1'b1;
             end
             
             endcase
-
         end
 
         alu3 : begin
             acc_write = 1'b1;
             alu_to_bus = 1'b1;
+            flag_write = 1'b1;
+            case(opcode)
+                `ADD : alu_op = `ADD_OP;
+                `SUB : alu_op = `SUB_OP;
+                `AND : alu_op = `AND_OP;
+                `OR  : alu_op = `OR_OP ;
+                `XOR : alu_op = `XOR_OP;
+
+            endcase
 
         end
 
         jmp1 : begin
-            case(opcode)
 
-                `JMP : begin
-                    pc_write = 1'b1;
-                    ir_to_bus = 1'b1;
-                end
+            pc_write = 1'b1;
+            ir_to_bus = 1'b1;
 
-                `JMPC : begin
-                    if(flag[1])
-                        begin
-                            pc_write = 1'b1;
-                            ir_to_bus = 1'b1; 
-                        end
-                end
-                `JMPZ : begin
-                    if(flag[0])
-                        begin
-                            pc_write = 1'b1;
-                            ir_to_bus = 1'b1; 
-                        end
-                end
-
-            endcase
         end
 
         ldi1 : begin
