@@ -3,7 +3,7 @@ module flag(
     input rst,
     input flag_write,
     input [1:0]flag_in,
-    output reg [1:0]flag_out;
+    output reg [1:0]flag_out
 );
 
 reg [1:0]flag_out_nxt;

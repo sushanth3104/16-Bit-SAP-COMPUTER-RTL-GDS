@@ -9,11 +9,6 @@ module ram(
 
 reg [15:0]mem[255:0];
 
-initial begin
-    $readmemh("./instr.txt",mem);
-end
-
-
 always @(posedge clk) begin
         if(ram_write) // Synchronous Write
             mem[addr] <= bus;

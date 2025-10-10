@@ -13,7 +13,7 @@ reg [15:0]pc_out_nxt;
 ////////////// flops
 always @(posedge clk ) begin
         if(rst)
-            pc_out <= 16'd0;
+            pc_out <= 16'd10;
         else
             pc_out <= pc_out_nxt; 
 end
