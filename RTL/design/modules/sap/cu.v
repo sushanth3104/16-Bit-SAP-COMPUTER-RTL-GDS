@@ -113,7 +113,7 @@ assign bus_cs = {
                 };
 
 //////////// flops
-always @(posedge clk ) begin
+always @(negedge  clk ) begin
 
     if(rst) state <= idle;
     else    state <= state_nxt;

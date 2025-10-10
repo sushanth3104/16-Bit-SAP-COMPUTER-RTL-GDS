@@ -6,7 +6,7 @@ wire [15:0]debug;
 
 integer i ;
 
-always #5 clk = ~clk ;
+always #1 clk = ~clk ;
 
 sap dut(
     .rst(rst),
@@ -29,11 +29,10 @@ initial begin // Writing Instr and Data to RAM for simulation
         dut.ram1.mem[i] = 0;
 
     /// Instr
-    dut.ram1.mem[0] = 16'd4;
-    dut.ram1.mem[1] = 16'd3;
-    dut.ram1.mem[10] = 16'h0000;
-    dut.ram1.mem[11] = 16'h0201;
-    dut.ram1.mem[12] = 16'h0B00;
+    dut.ram1.mem[0] = 16'd3;
+    dut.ram1.mem[10] = 16'h0B00;
+    dut.ram1.mem[11] = 16'h0200;
+    dut.ram1.mem[12] = 16'h080A;
 
 end
 
