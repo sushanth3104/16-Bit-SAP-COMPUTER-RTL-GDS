@@ -23,7 +23,7 @@ dfflibmap -liberty sky130hd_tt.lib
 abc -liberty sky130hd_tt.lib
 
 # write synthesized design
-write_verilog -noattr -noexpr -nohex -nodec synth.v
+write_verilog -noattr -noexpr -nohex -nodec synth-nl.v
 
 # Provides statistics of all cells
 stat -liberty sky130hd_tt.lib

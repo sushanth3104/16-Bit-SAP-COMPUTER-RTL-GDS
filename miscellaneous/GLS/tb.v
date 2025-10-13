@@ -2,13 +2,15 @@
 module tb;
 
 reg clk,rst;
+
 wire [15:0]_out_;
 wire [15:0]debug;
-
 
 integer i ;
 
 always #1 clk = ~clk ;
+
+////////////////////  Top-level RTL Design
 
 sap dut(
     .rst(rst),
@@ -16,6 +18,7 @@ sap dut(
     ._out_(_out_),
     .debug(debug)
 );
+
 
 initial begin
 
