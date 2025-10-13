@@ -1,17 +1,17 @@
 // Place defines first
-`include"../rtl/defines.v"
+`include"../../front-end/rtl/defines.v"
 
 // Module Codes
-`include"../rtl/accumulator.v"
-`include"../rtl/alu.v"
-`include"../rtl/b_register.v"
-`include"../rtl/cu.v"
-`include"../rtl/flag.v"
-`include"../rtl/ir.v"
-`include"../rtl/mar.v"
-`include"../rtl/out.v"
-`include"../rtl/pc.v"
-`include"../rtl/ram.v"
+`include"../../front-end/rtl/accumulator.v"
+`include"../../front-end/rtl/alu.v"
+`include"../../front-end/rtl/b_register.v"
+`include"../../front-end/rtl/cu.v"
+`include"../../front-end/rtl/flag.v"
+`include"../../front-end/rtl/ir.v"
+`include"../../front-end/rtl/mar.v"
+`include"../../front-end/rtl/out.v"
+`include"../../front-end/rtl/pc.v"
+`include"../../front-end/rtl/ram.v"
 
 // Top Module Codee
-`include"../rtl/sap.v"
+`include"../../front-end/rtl/sap.v"

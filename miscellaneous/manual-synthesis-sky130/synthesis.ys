@@ -1,0 +1,36 @@
+# read design
+read_verilog include.v
+
+# elaborate design hierarchy
+hierarchy -check -top sap
+
+# the high-level stuff
+proc; opt; fsm; opt; memory; opt
+
+# Resource Sharing
+share -aggressive
+
+# mapping to internal cell library
+techmap; opt
+
+# cleanup
+clean
+
+# mapping flip-flops to mycells.lib
+dfflibmap -liberty sky130hd_tt.lib
+
+# mapping logic to mycells.lib
+abc -liberty sky130hd_tt.lib
+
+# write synthesized design
+write_verilog -noattr -noexpr -nohex -nodec synth.v
+
+# Provides statistics of all cells
+stat -liberty sky130hd_tt.lib
+
+# Graph PNG
+show -format png -prefix design_graph
+
+# Checks for latches and any signal that are undriven
+check -assert
+
