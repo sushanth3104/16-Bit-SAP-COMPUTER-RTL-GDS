@@ -1,0 +1,9 @@
+{
+    "DESIGN_NAME": "sap",
+    "VERILOG_FILES": "dir::../front-end/verification/includes.v",
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 25,
+    "FP_CORE_UTIL": 40,
+    "FP_PIN_ORDER_CFG": "dir::pin_order.cfg"
+
+}

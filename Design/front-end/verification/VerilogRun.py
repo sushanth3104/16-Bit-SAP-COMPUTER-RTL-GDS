@@ -2,7 +2,7 @@
 import subprocess, sys
 from pathlib import Path
 
-subprocess.run(["iverilog", "-o", "sim_out.vvp", "tb.v", "include.v"], check=True)
+subprocess.run(["iverilog","-o","sim_out.vvp", "tb.v", "includes.v"], check=True)
 subprocess.run(["vvp", "sim_out.vvp"], check=True)
 
 vcd = Path("sim_output.vcd")
