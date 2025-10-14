@@ -1,6 +1,6 @@
 {
     "DESIGN_NAME": "sap",
-    "VERILOG_FILES": "dir::../front-end/verification/includes.v",
+    "VERILOG_FILES": "dir::../RTL-SIM/verification/includes.v",
     "CLOCK_PORT": "clk",
     "CLOCK_PERIOD": 25,
     "FP_CORE_UTIL": 40,
